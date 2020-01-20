@@ -1,0 +1,33 @@
+#include<iostream>
+#include<queue>
+#include<vector>
+using namespace std;
+
+int main(){
+ 
+ priority_queue <int ,vector<int>, greater<int> > pq;  // min heap created.
+ int k;   // K largest elements
+ cin>>k; 
+ int data;
+ cin>>data;
+ int cs=0;
+ // we are not pushing all elements ,to save spaces
+   while(data!=-1){
+      if(cs<k){
+       pq.push(data);
+       cs++;
+      }
+    // what if is equal // min heap so remove top element
+     if(cs==k && data>pq.top()){
+         pq.pop();  // min element out
+         pq.push(data);
+     }
+  cin>>data;      
+   }
+
+ while(!pq.empty()){
+     cout<<pq.top()<<", ";
+     pq.pop();
+ }
+   return 0; 
+}
