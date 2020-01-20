@@ -1,0 +1,56 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+// &v : bcoz we need to take refernce of original obj to reflect changes
+void heap(vector<int > &v,int data,int k){
+  if(v[k] < data){
+      v.pop_back();
+      v.push_back(data);
+// inserted ,now keep heap property --> sort max to min
+  int cindex = k;
+  int pindex;
+       while(pindex>0){
+          pindex = cindex/2; //reached parent
+           if(v[pindex] < v[cindex]){
+               swap(v[pindex],v[cindex]);
+           } 
+     cindex = cindex/2;
+       }
+ // now place btw pindex+1 and k-1
+  for(int i=pindex+1;i<k;i++){
+      if(v[i] < v[k]){
+          swap(v[i],v[k]);
+      }
+  }      
+ 
+  }else{
+      // no problem created by current data
+      return;
+   }
+} // end of function heap()
+
+int main(){
+vector<int >v;    // to store k large values 
+int k; 
+cin>>k;
+int data;
+cin>>data;
+ v.push_back(-1); //dummy element at 0th index
+ 
+  for(int i=1;i<=k;i++){
+      v.push_back(0);
+  } // initial values/default values
+ 
+ // running stream , main input
+   while(data!=-1){
+     heap(v,data,k); 
+  cin>>data;     
+   }
+
+for(int i=1;i<=k;i++){
+     cout<<v[i]<<" ";
+ }
+
+  return 0;  
+}
